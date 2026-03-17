@@ -16,7 +16,6 @@ def create_instance(c_instance):
         specification=Specification,
         c_instance=c_instance)
 
-
 class Specification(ControlSurfaceSpecification):
     elements_type = Elements
     control_surface_skin = create_skin()

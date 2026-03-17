@@ -19,7 +19,7 @@ def create_mappings(control_surface):
         solo_buttons='solo_buttons',
         track_select_buttons='rec_arm_buttons',
         volume_controls='volume_controls',
-        master_track_volume_control='master_volume_control')
+        master_track_volume_control= 'master_volume_control')
 
     mappings['Encoder_Modes'] = dict(
         send=dict(component='Mixer', send_a_controls='send_a_controls',
