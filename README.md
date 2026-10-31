@@ -71,8 +71,10 @@ If you are not familiar with Git or command-line tools, you can easily install t
 5. Inside your `User Library`, check if there is a folder named **`Remote Scripts`**. If it does not exist, create a new folder and name it exactly `Remote Scripts`.
 
 ### Step 3: Install the Script
-1. Move or copy the extracted script folder (you can name it `KFX-CK8-PRO`) directly inside your `Remote Scripts` folder:
-   `User Library/Remote Scripts/KFX-CK8-PRO/`
+1. Move or copy the extracted script folder inside your `Remote Scripts` folder and name it to **`kfx_ck8_pro`**:
+
+   `User Library/Remote Scripts/kfx_ck8_pro/`
+   > ⚠️ **Important Python Note:** Make sure the folder name **does not contain spaces or hyphens** (e.g., use `kfx_ck8_pro` instead of `Kfx Ck8 pro`). Python package naming rules require valid module identifiers; otherwise, Ableton Live's Python interpreter will fail to load the script.
 
 ### Step 4: Enable in Ableton Live
 1. Restart Ableton Live.
