@@ -1,0 +1,28 @@
+name: Release Script ZIP
+
+on:
+  push:
+    tags:
+      - 'v*'
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+    - uses: actions/checkout@v4
+
+    - name: Create Clean ZIP
+      run: |
+        mkdir -p build/KFX-CK8-PRO
+        cp __init__.py elements.py mappings.py ck8_control.py tap_select.py build/KFX-CK8-PRO/
+        cd build
+        zip -r ../KFX-CK8-PRO-Remote-Script.zip KFX-CK8-PRO
+
+    - name: Upload Release Asset
+      uses: softprops/action-gh-release@v2
+      with:
+        files: KFX-CK8-PRO-Remote-Script.zip
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
