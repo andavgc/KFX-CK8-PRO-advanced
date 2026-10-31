@@ -4,17 +4,23 @@ from ableton.v3.control_surface.capabilities import CONTROLLER_ID_KEY, NOTES_CC,
     controller_id, inport, outport
 from .elements import Elements
 from .mappings import create_mappings
+from . import ck8_control
+
 
 def get_capabilities():
     return {
-        CONTROLLER_ID_KEY: controller_id(vendor_id=2536, product_ids=[49], model_name=['MIDI Mix']), 
+        CONTROLLER_ID_KEY: controller_id(vendor_id=2536, product_ids=[49], model_name=['MIDI Mix']),
         PORTS_KEY: [inport(props=[NOTES_CC, SCRIPT]), outport(props=[NOTES_CC, SCRIPT])]}
 
+
 def create_instance(c_instance):
-    return create_control_surface(
+    surface = create_control_surface(
         name='MIDI Mix',
         specification=Specification,
         c_instance=c_instance)
+    ck8_control.attach(surface, c_instance)
+    return surface
+
 
 class Specification(ControlSurfaceSpecification):
     elements_type = Elements
