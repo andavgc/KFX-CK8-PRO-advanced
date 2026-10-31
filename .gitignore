@@ -1,13 +1,29 @@
-node_modules/
-bower_components/
-*.log
+# Python bytecode & caches
+__pycache__/
+*.py[cod]
+*$py.class
+.pytest_cache/
+.tox/
 
-build/
-dist/
+# Virtual Environments
+venv/
+env/
+.env
+.venv/
 
+# IDEs & Editors
+.vscode/
+.idea/
+.DS_Store
+
+# Ableton & Project specific
 *.als
 Backup/
 Samples/
-.DS_Store
+*.log
 
-__pycache__
+# Build / Distribution
+build/
+dist/
+node_modules/
+bower_components/
