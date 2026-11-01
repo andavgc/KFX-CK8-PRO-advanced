@@ -401,6 +401,14 @@ class CK8Control(object):
         self._touch()
         self._knob_pos[(row, channel)] = value
         self._note_cc(('knob', row, channel))
+
+        track = self._track_at(self._offset + channel if self._mode == 1 else self._offset + row)
+        if track is not None:
+            try:
+                _song().view.selected_track = track
+            except Exception:
+                pass
+
         param = self._knob_param(row, channel)
         self._apply(('knob', row, channel), param, value / 127.0, PICKUP_KNOBS,
                     force=self._in_dump())
