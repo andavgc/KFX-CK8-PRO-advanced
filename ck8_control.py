@@ -41,6 +41,8 @@ PICKUP_KNOBS = True            # knob only takes parameter after passing current
 PICKUP_FADERS = True           # same for volume faders (includes master)
 PICKUP_TOLERANCE = 0.03        # "close enough" to assume without crossing (0 to 1)
 
+KNOB_SELECT_COOLDOWN = 0.4     # cooldown window (seconds) to prevent constant track switching when tweaking multiple knobs
+
 VOLUME_MAX = 0.85              # 0.85 = 0 dB in Live
 MASTER_LIMIT_0DB = True        # False for master to go up to +6 dB
 
@@ -147,6 +149,7 @@ class CK8Control(object):
         self._dump_token = 0
         self._recent_selects = []           # (timestamp, channel, track, previous device)
         self._recent = []                   # (timestamp, control) to detect dump
+        self._last_knob_select_time = 0.0   # debounce timer for knob track selection
 
         self._bind()
         self._log('started (mode 1, offset 0)')
@@ -404,10 +407,13 @@ class CK8Control(object):
 
         track = self._track_at(self._offset + channel if self._mode == 1 else self._offset + row)
         if track is not None:
-            try:
-                _song().view.selected_track = track
-            except Exception:
-                pass
+            now = time.time()
+            if now - self._last_knob_select_time >= KNOB_SELECT_COOLDOWN:
+                try:
+                    _song().view.selected_track = track
+                    self._last_knob_select_time = now
+                except Exception:
+                    pass
 
         param = self._knob_param(row, channel)
         self._apply(('knob', row, channel), param, value / 127.0, PICKUP_KNOBS,
@@ -480,7 +486,7 @@ class CK8Control(object):
             return
 
         if self._in_dump():
-            return                                   # SEND ALL does not change devices
+            return                                   # SEND ALL nao troca devices
         devices = list(track.devices)
         if not devices:
             return
