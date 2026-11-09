@@ -1,5 +1,7 @@
 # KFX CK8 PRO Advanced Remote Script for Ableton Live
 
+> 🇧🇷 *Leia este README em Português: [README_PT.md](./README_PT.md)*
+
 ## Overview
 
 This repository is a **Fork** based on the original work by the creators of [MIDIMixD / MIDI Mix remote script for Ableton Live](https://github.com/diff-arch/MIDIMixD).
@@ -40,6 +42,7 @@ Designed for tweaking plugin and device parameters directly from your hardware:
 The `REC ARM` buttons on channels 1 through 8 double as track selection and arming buttons:
 - **Single Short Tap:** Arms or disarms the track for recording.
 - **Double Tap (Two quick taps):** Selects the track in Ableton Live.
+- **Automatic Track Selection by Knobs (with Cooldown):** Turning any knob automatically selects that track in Ableton. A smart 400ms debounce prevents rapid switching when tweaking multiple knobs.
 
 ### 5. Parameter Pickup (No Jumps)
 Both knobs and faders feature **Pickup** (`PICKUP_KNOBS = True`, `PICKUP_FADERS = True`). When switching modes or pages, a control will not affect the software parameter until your physical knob/fader position crosses or matches the current software value, preventing sudden audio jumps.
@@ -71,10 +74,10 @@ If you are not familiar with Git or command-line tools, you can easily install t
 5. Inside your `User Library`, check if there is a folder named **`Remote Scripts`**. If it does not exist, create a new folder and name it exactly `Remote Scripts`.
 
 ### Step 3: Install the Script
-1. Move or copy the extracted script folder inside your `Remote Scripts` folder and name it to **`kfx_ck8_pro`**:
+1. Move or copy the extracted script folder inside your `Remote Scripts` folder and rename it to **`kfx_ck8_pro`**:
 
    `User Library/Remote Scripts/kfx_ck8_pro/`
-   > ⚠️ **Important Python Note:** Make sure the folder name **does not contain spaces or hyphens** (e.g., use `kfx_ck8_pro` instead of `Kfx Ck8 pro`). Python package naming rules require valid module identifiers; otherwise, Ableton Live's Python interpreter will fail to load the script.
+   > ⚠️ **Important Python Note:** Make sure the folder name **does not contain spaces or hyphens** (e.g., use `kfx_ck8_pro` instead of `KFX CK8 PRO Advanced`). Python package naming rules require valid module identifiers; otherwise, Ableton Live's Python interpreter will fail to load the script.
 
 ### Step 4: Enable in Ableton Live
 1. Restart Ableton Live.
