@@ -1,5 +1,7 @@
 # KFX CK8 PRO Advanced Remote Script para Ableton Live
 
+> 🇺🇸 *Read this README in English: [README_EN.md](./README_EN.md)*
+
 ## Visão Geral
 
 Este repositório é um **Fork** baseado no trabalho original dos criadores do [MIDIMixD / MIDI Mix remote script para Ableton Live](https://github.com/diff-arch/MIDIMixD).
@@ -11,7 +13,7 @@ No Akai MIDI Mix original, botões como `SOLO` são utilizados em combinações 
 
 Para tornar este controlador totalmente funcional no Ableton Live, este script adapta a arquitetura de controle:
 - **Função Shift:** Movida do `SOLO` para o **`REC ARM 1`** (pressionar e segurar o botão `REC ARM` da primeira faixa atua como a tecla `Shift`).
-- **Alternância de Modos e Navegação:** Adaptados especificamente para cái layout e fluxo de trabalho do CK8 PRO.
+- **Alternância de Modos e Navegação:** Adaptados especificamente para o layout e fluxo de trabalho do CK8 PRO.
 
 ---
 
