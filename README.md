@@ -1,110 +1,111 @@
-# KFX CK8 PRO Advanced Remote Script para Ableton Live
+# KFX CK8 PRO Advanced Remote Script for Ableton Live
 
-> 🇺🇸 *Read this README in English: [README_EN.md](./README_EN.md)*
+> 🇧🇷 *Leia este README em Português: [README_PT.md](./README_PT.md)*
 
-## Visão Geral
+## Overview
 
-Este repositório é um **Fork** baseado no trabalho original dos criadores do [MIDIMixD / MIDI Mix remote script para Ableton Live](https://github.com/diff-arch/MIDIMixD).
+This repository is a **Fork** based on the original work by the creators of [MIDIMixD / MIDI Mix remote script for Ableton Live](https://github.com/diff-arch/MIDIMixD).
 
-Este script foi desenvolvido especificamente para o controlador MIDI **KFX CK8 PRO** (que compartilha o layout físico do **Akai MIDI Mix**), mas traz adaptações cruciais de comportamento de hardware.
+This script is specifically designed for the **KFX CK8 PRO** MIDI controller, which shares the physical layout of the **Akai MIDI Mix**, but features crucial hardware behavior differences.
 
-### Por que este Fork foi criado (Adaptações para o KFX CK8 PRO)
-No Akai MIDI Mix original, botões como `SOLO` são utilizados em combinações modificadoras (como `SOLO + BANK RIGHT`). No entanto, no controlador **KFX CK8 PRO**, o botão `SOLO` não envia mensagens MIDI CC ou de nota padrão da mesma forma para combinações de modificadores.
+### Why this Fork was created (KFX CK8 PRO Adaptations)
+On the original Akai MIDI Mix, features like `SOLO` buttons are used for modifier combinations (such as `SOLO + BANK RIGHT`). However, on the **KFX CK8 PRO** controller, the `SOLO` button does not send standard MIDI CC or note messages in the same way for modifier combinations. 
 
-Para tornar este controlador totalmente funcional no Ableton Live, este script adapta a arquitetura de controle:
-- **Função Shift:** Movida do `SOLO` para o **`REC ARM 1`** (pressionar e segurar o botão `REC ARM` da primeira faixa atua como a tecla `Shift`).
-- **Alternância de Modos e Navegação:** Adaptados especificamente para o layout e fluxo de trabalho do CK8 PRO.
-
----
-
-## Recursos Detalhados e Fluxo de Trabalho
-
-O script opera em dois modos principais, oferecendo controle tradicional de mixagem e edição avançada de parâmetros de dispositivos.
-
-### 1. Modo 1: Modo Mixer (Mixagem Tradicional)
-Projetado para tarefas padrão de mixagem em blocos de 8 faixas:
-- **Knobs (Fileiras 1, 2 e 3):** Controlam os **Sends A, B e C** de cada canal.
-- **Shift + Knobs (Fileiras 1, 2 e 3):** Segure `REC ARM 1` (`Shift`) enquanto gira os knobs para controlar **Sends D, E e Panorâmica (Pan)**.
-- **Faders 1–8:** Controlam o **Volume** da faixa (a posição máxima/topo corresponde a 0 dB).
-- **BANK L / R:** Move o banco de 8 faixas para a esquerda ou direita na sua sessão.
-
-### 2. Modo 2: Modo de Dispositivos e Parâmetros (Controle Avançado)
-Projetado para ajustar parâmetros de plugins e dispositivos diretamente pelo hardware:
-- **Knobs (Fileiras 1, 2 e 3):** Controlam os **primeiros 8 parâmetros** do dispositivo selecionado nas faixas 1, 2 e 3.
-- **Faders 1–8:** **Selecionam dispositivos** em cada faixa. Mover um fader de baixo para cima alterna e seleciona os dispositivos carregados naquela faixa.
-- **BANK L / R:** Move em blocos de 3 faixas.
-
-### 3. Atalhos para Troca de Modo
-- **Mudar para o Modo 2:** Segure `Shift` (`REC ARM 1`) + pressione **`BANK RIGHT`**.
-- **Voltar para o Modo 1:** Segure `Shift` (`REC ARM 1`) + pressione **`BANK LEFT`**.
-
-### 4. Multiuso do REC ARM (Toque e Seleção)
-Os botões `REC ARM` dos canais 1 a 8 cumprem duas funções (armar gravação e selecionar a faixa):
-- **1 Toque curto:** Arma ou desarma a gravação da faixa.
-- **2 Toques curtos (Toque duplo):** Seleciona a faixa no Ableton Live.
-- **Seleção automática por Knobs (com Cooldown):** Ao girar qualquer knob, a faixa correspondente é selecionada automaticamente no Ableton. Um sistema inteligente de *debounce* (400ms) evita que a seleção fique pulando ao ajustar múltiplos knobs simultaneamente.
-
-### 5. Pickup de Parâmetros (Sem Saltos Bruscos)
-Tanto os knobs quanto os faders possuem o recurso de **Pickup** (`PICKUP_KNOBS = True`, `PICKUP_FADERS = True`). Ao trocar de modo ou página, um controle físico só afetará o parâmetro do software quando a posição física cruzar ou coincidir com o valor atual no Ableton, evitando saltos repentinos no áudio.
-
-### 6. Botão Send All
-Pressionar o botão **`SEND ALL`** (ou quando há rajadas de controle) força instantaneamente o envio das posições físicas de todos os knobs para seus respectivos alvos, ignorando temporariamente o *pickup* para sincronizar os parâmetros na hora.
-
-### 7. Caixa Vermelha (Session Box) e LEDs
-- **Caixa Vermelha:** Desenha e mantém sincronizada a caixa de destaque da sessão diretamente no Ableton Live.
-- **Feedback por LEDs:** Acende em tempo real os LEDs físicos dos botões de Mute e Arm de acordo com o estado do projeto.
+To make this controller fully functional in Ableton Live, this script adapts the control architecture:
+- **Shift Function:** Moved from `SOLO` to **`REC ARM 1`** (holding down the first track's `REC ARM` button acts as `Shift`).
+- **Mode Switching & Navigation:** Adapted specifically for the CK8 PRO layout and workflow.
 
 ---
 
-## Guia de Instalação (Para Iniciantes)
+## Detailed Features & Workflow
 
-Se você não tem familiaridade com Git ou linha de comando, é muito simples instalar este script baixando um arquivo ZIP:
+The script operates in two main modes, giving you both traditional mixing control and advanced device parameter editing.
 
-### Passo 1: Baixar o arquivo ZIP
-1. Role até o topo desta página do repositório no GitHub.
-2. Clique no botão verde **`<> Code`**.
-3. Clique em **`Download ZIP`**.
-4. Salve o arquivo no seu computador e descompacte-o. Você receberá uma pasta contendo os arquivos do script.
+### 1. Mode 1: Mixer Mode (Traditional Mixing)
+Designed for standard mixing tasks across 8 tracks at a time:
+- **Knobs (Rows 1, 2, and 3):** Control **Sends A, B, and C** for each channel.
+- **Shift + Knobs (Rows 1, 2, and 3):** Hold `REC ARM 1` (`Shift`) while turning knobs to control **Sends D, E, and Track Panning**.
+- **Faders 1–8:** Control track **Volume** (top position corresponds to 0 dB).
+- **BANK L / R:** Shifts the 8-track bank left or right across your session.
 
-### Passo 2: Localizar a pasta "Remote Scripts" no Ableton Live
-1. Abra o **Ableton Live**.
-2. Vá em **Preferências** (ou **Configurações** nas versões mais recentes) -> **Arquivo / Pasta** (File / Folder).
-3. Localize o caminho da sua **User Library** (Biblioteca do Usuário).
-4. Abra a pasta `User Library` no explorador de arquivos do seu computador (Finder no macOS, Explorador de Arquivos no Windows).
-5. Dentro da `User Library`, verifique se existe uma pasta chamada **`Remote Scripts`**. Caso não exista, crie uma nova pasta com exatamente esse nome.
+### 2. Mode 2: Device & Parameter Mode (Deep Device Control)
+Designed for tweaking plugin and device parameters directly from your hardware:
+- **Knobs (Rows 1, 2, and 3):** Control the **first 8 parameters** of the selected device across tracks 1, 2, and 3.
+- **Faders 1–8:** **Select devices** on each track. Moving a fader from bottom to top cycles through and selects the devices loaded on that track.
+- **BANK L / R:** Shifts by 3 tracks.
 
-### Passo 3: Instalar o Script
-1. Mova ou copie a pasta descompactada para dentro da pasta `Remote Scripts` e renomeie-a obrigatoriamente para **`kfx_ck8_pro`**:
+### 3. Mode Switching Shortcuts
+- **Switch to Mode 2:** Hold `Shift` (`REC ARM 1`) + press **`BANK RIGHT`**.
+- **Return to Mode 1:** Hold `Shift` (`REC ARM 1`) + press **`BANK LEFT`**.
+
+### 4. REC ARM Multi-Functionality (Tap & Select)
+The `REC ARM` buttons on channels 1 through 8 double as track selection and arming buttons:
+- **Single Short Tap:** Arms or disarms the track for recording.
+- **Double Tap (Two quick taps):** Selects the track in Ableton Live.
+- **Automatic Track Selection by Knobs (with Cooldown):** Turning any knob automatically selects that track in Ableton. A smart 400ms debounce prevents rapid switching when tweaking multiple knobs.
+
+### 5. Parameter Pickup (No Jumps)
+Both knobs and faders feature **Pickup** (`PICKUP_KNOBS = True`, `PICKUP_FADERS = True`). When switching modes or pages, a control will not affect the software parameter until your physical knob/fader position crosses or matches the current software value, preventing sudden audio jumps.
+
+### 6. Send All Button
+Pressing the **`SEND ALL`** button (or when rapid control changes occur) instantly forces all physical knob positions to be sent to their current targets, ignoring pickup temporarily so your parameters instantly sync with the hardware knobs.
+
+### 7. Session Box & LED Feedback
+- **Red Session Box:** Automatically draws and keeps the session highlight box aligned in Ableton Live.
+- **LED Feedback:** Real-time feedback lights up the hardware LED buttons for Mute and Arm states.
+
+---
+
+## Installation (Beginner-Friendly Guide)
+
+If you are not familiar with Git or command-line tools, you can easily install this script by downloading a ZIP file:
+
+### Step 1: Download the ZIP File
+1. Scroll to the top of this GitHub repository page.
+2. Click the green **`<> Code`** button.
+3. Click **`Download ZIP`**.
+4. Save the file to your computer and extract (unzip) it. You will get a folder containing the script files.
+
+### Step 2: Locate your Ableton Live "Remote Scripts" Folder
+1. Open **Ableton Live**.
+2. Go to **Preferences** (or **Settings** on newer versions) -> **File / Folder**.
+3. Locate your **User Library** path.
+4. Open your `User Library` folder on your computer's file explorer (Finder on macOS, File Explorer on Windows).
+5. Inside your `User Library`, check if there is a folder named **`Remote Scripts`**. If it does not exist, create a new folder and name it exactly `Remote Scripts`.
+
+### Step 3: Install the Script
+1. Move or copy the extracted script folder inside your `Remote Scripts` folder and rename it to **`kfx_ck8_pro`**:
+
    `User Library/Remote Scripts/kfx_ck8_pro/`
-   > ⚠️ **Nota Importante sobre o Python:** Certifique-se de que o nome da pasta **não contenha espaços ou hífens** (ex: use `kfx_ck8_pro` em vez de `KFX-CK8-PRO` ou `KFX CK8 PRO`). As regras de módulos do Python exigem identificadores válidos; caso contrário, o interpretador do Ableton Live falhará ao carregar o script.
+   > ⚠️ **Important Python Note:** Make sure the folder name **does not contain spaces or hyphens** (e.g., use `kfx_ck8_pro` instead of `KFX CK8 PRO Advanced`). Python package naming rules require valid module identifiers; otherwise, Ableton Live's Python interpreter will fail to load the script.
 
-### Passo 4: Ativar no Ableton Live
-1. Reinicie o Ableton Live.
-2. Abra **Preferências** -> **Link / Tempo / MIDI**.
-3. No campo **Control Surface**, selecione **MIDI Mix** (or the script name).
-4. Defina as portas **Input** e **Output** para o seu controlador KFX CK8 PRO.
-
----
-
-## Contribuições e Discussão
-
-Contribuições, reporte de bugs e discussões são muito bem-vindos! Para ajudar a melhorar este projeto:
-
-1. **Abrir uma Issue:** Se encontrar algum bug, tiver dúvidas ou quiser sugerir uma melhoria, abra uma *Issue* detalhando sua versão do Ableton Live e os passos para reproduzir o problema.
-2. **Enviar uma Pull Request (PR):**
-   - Faça um Fork do repositório.
-   - Crie uma branch de recurso (`git checkout -b feature/SuaMelhoria`).
-   - Faça o commit das suas alterações (`git commit -m 'Adiciona tal recurso'`).
-   - Envie para a sua branch (`git push origin feature/SuaMelhoria`).
-   - Abra uma Pull Request para a branch `main`.
-3. **Boas Práticas:**
-   - Mantenha o código limpo, legível e estruturado.
-   - Documente claramente novos mapeamentos de controle.
-   - Discuta mudanças arquiteturais importantes abrindo uma *Issue* antes de começar a codificar.
+### Step 4: Enable in Ableton Live
+1. Restart Ableton Live.
+2. Open **Preferences** -> **Link / Tempo / MIDI**.
+3. Under the **Control Surface** dropdown, select **MIDI Mix** (or the script name).
+4. Set both **Input** and **Output** ports to your KFX CK8 PRO controller.
 
 ---
 
-## Créditos e Licença
+## Contributions & Discussion
 
-- **Projeto Original:** Forked a partir de [MIDIMixD por diff-arch](https://github.com/diff-arch/MIDIMixD).
-- **Licença:** Distribuído sob a Licença MIT. Veja o arquivo `LICENSE.txt` para mais informações.
+We welcome contributions, bug reports, and feature discussions! If you want to help improve this script:
+
+1. **Open an Issue:** If you encounter a bug, have questions, or want to suggest an enhancement, please open an Issue detailing your Ableton Live version and steps to reproduce.
+2. **Submit a Pull Request (PR):**
+   - Fork the repository.
+   - Create a feature branch (`git checkout -b feature/AmazingFeature`).
+   - Commit your changes with clear messages (`git commit -m 'Add some AmazingFeature'`).
+   - Push to your branch (`git push origin feature/AmazingFeature`).
+   - Open a Pull Request against the main branch.
+3. **Good Practices:**
+   - Keep code clean, readable, and structured.
+   - Document any new controller mappings or behavior updates.
+   - Discuss major architectural changes in an Issue before starting implementation.
+
+---
+
+## Credits & License
+
+- **Original Project:** Forked from [MIDIMixD by diff-arch](https://github.com/diff-arch/MIDIMixD).
+- **License:** Distributed under the MIT License. See `LICENSE.txt` for more information.
